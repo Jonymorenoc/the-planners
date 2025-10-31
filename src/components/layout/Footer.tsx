@@ -1,4 +1,4 @@
-import { Heart, Instagram, Mail, Phone, Send } from "lucide-react";
+import { Instagram, Mail, Phone, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function Footer() {
@@ -6,13 +6,13 @@ export function Footer() {
     <footer className="mt-20 border-t border-white/30 bg-white/30 backdrop-blur-xl">
       <div className="container flex flex-col gap-8 py-12 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-r from-primary to-primary-glow text-white shadow-glow">
-            <Heart className="h-5 w-5" />
+          <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/80 shadow-glow">
+            <img src="/the-planners-logo.svg" alt="The Planners" className="h-9 w-9" />
           </span>
           <div>
-            <p className="font-display text-xl text-foreground">DreamWedding</p>
+            <p className="font-display text-xl text-foreground">The Planners</p>
             <p className="text-sm text-foreground/60">
-              Bodas destino diseñadas con amor y tecnología.
+              Bodas destino diseñadas con amor, datos y creatividad.
             </p>
           </div>
         </div>
@@ -26,7 +26,7 @@ export function Footer() {
                 <Phone className="h-4 w-4" /> +52 55 1234 5678
               </li>
               <li className="flex items-center gap-2">
-                <Mail className="h-4 w-4" /> hola@dreamwedding.app
+                <Mail className="h-4 w-4" /> hola@theplanners.app
               </li>
             </ul>
           </div>
@@ -36,7 +36,7 @@ export function Footer() {
             </p>
             <ul className="mt-3 space-y-2">
               <li className="flex items-center gap-2">
-                <Instagram className="h-4 w-4" /> @dreamwedding.app
+                <Instagram className="h-4 w-4" /> @theplanners.app
               </li>
               <li className="flex items-center gap-2">
                 <Send className="h-4 w-4" /> Newsletter mensual
@@ -59,7 +59,7 @@ export function Footer() {
       </div>
       <div className="border-t border-white/30 py-4">
         <div className="container flex flex-col items-center justify-between gap-2 text-xs text-foreground/40 md:flex-row">
-          <p>© {new Date().getFullYear()} DreamWedding · Creado para planners visionarios.</p>
+          <p>© {new Date().getFullYear()} The Planners · Creado para planners visionarios.</p>
           <div className="flex gap-4">
             <span>Términos</span>
             <span>Privacidad</span>

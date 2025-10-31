@@ -128,7 +128,7 @@ export function ContractsPage() {
       <header className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-white/50 px-3 py-1 text-xs uppercase tracking-[0.35em] text-foreground/60">
-            DreamWedding AI · Motor local
+            The Planners AI · Motor local
           </span>
           <h1 className="mt-3 font-display text-3xl text-foreground md:text-4xl">
             Gestión inteligente de contratos
@@ -258,7 +258,7 @@ export function ContractsPage() {
                     )}
                   >
                     <p className="text-xs uppercase tracking-wide text-foreground/40">
-                      {message.role === "assistant" ? "DreamWedding AI" : "Planner"}
+                      {message.role === "assistant" ? "The Planners AI" : "Planner"}
                     </p>
                     <p className="mt-1 whitespace-pre-line leading-relaxed">
                       {message.content}

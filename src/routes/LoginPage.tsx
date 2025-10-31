@@ -13,9 +13,9 @@ type LoginForm = {
 };
 
 const defaultForm: LoginForm = {
-  email: "planner@dreamwedding.app",
+  email: "planner@theplanners.app",
   password: "demo1234",
-  company: "DreamWedding Studio",
+  company: "The Planners Studio",
 };
 
 export function LoginPage() {
@@ -28,7 +28,7 @@ export function LoginPage() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     toast.success("Bienvenida de nuevo", {
-      description: "Accediendo a DreamWedding en modo demo.",
+      description: "Accediendo a The Planners en modo demo.",
     });
   };
 

@@ -126,7 +126,7 @@ const buildMockContractAnalysis = (file: File): ContractAnalysis => ({
 const buildMockPreview = (payload: WebsiteGeneratorPayload) => `
   <section style="padding:3rem; font-family:'Work Sans', sans-serif; background:linear-gradient(130deg, hsla(340,70%,92%,0.9), hsla(270,45%,90%,0.9)); color:#5f4c6b;">
     <header style="text-align:center; margin-bottom:3rem;">
-      <p style="letter-spacing:0.4em; text-transform:uppercase;">DreamWedding</p>
+      <p style="letter-spacing:0.4em; text-transform:uppercase;">The Planners</p>
       <h1 style="font-family:'Playfair Display', serif; font-size:3rem; color:hsl(340,60%,45%)">
         ${payload.coupleNames}
       </h1>

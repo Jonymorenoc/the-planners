@@ -448,7 +448,7 @@ export const plannerEvents: PlannerEvent[] = [
   {
     id: "pe-3",
     couple: "Michelle & David",
-    brand: "DreamWedding Lab",
+    brand: "The Planners Lab",
     destination: "Lisboa, Portugal",
     date: "2025-09-07",
     progress: 25,

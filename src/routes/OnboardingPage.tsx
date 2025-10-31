@@ -451,7 +451,7 @@ export function OnboardingPage() {
                       <p className="font-semibold text-foreground">4. Revisión legal</p>
                       <p className="mt-1 text-xs uppercase tracking-wide text-foreground/45">Contratos</p>
                       <p className="text-sm text-foreground/70">
-                        Enviar contrato de fotografía a DreamWedding AI para comentarios preliminares.
+                        Enviar contrato de fotografía a The Planners AI para comentarios preliminares.
                       </p>
                     </div>
                   </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { Heart, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -37,14 +37,14 @@ export function Navbar() {
       )}
     >
       <nav className="container flex items-center justify-between py-4">
-        <NavLink to="/" className="flex items-center gap-2">
-          <span className="relative flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-r from-primary to-primary-glow text-white shadow-glow">
-            <Heart className="h-5 w-5" />
+        <NavLink to="/" className="flex items-center gap-3">
+          <span className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-white/80 shadow-glow">
+            <img src="/the-planners-logo.svg" alt="The Planners" className="h-9 w-9" />
           </span>
           <div className="flex flex-col leading-tight">
-            <span className="font-display text-lg text-foreground">DreamWedding</span>
+            <span className="font-display text-lg text-foreground">The Planners</span>
             <span className="text-xs tracking-[0.35em] text-foreground/60">
-              DESTINATION
+              DESTINATION SUITE
             </span>
           </div>
         </NavLink>
