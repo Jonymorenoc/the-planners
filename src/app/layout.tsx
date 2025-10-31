@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
-import { getServerSession } from "next-auth";
 import { CalendarHeart, Sparkles } from "lucide-react";
 
 import { Sidebar } from "@/components/layout/sidebar";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import "./globals.css";
-import { authOptions } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 
 const geistSans = Geist({
@@ -25,13 +23,11 @@ export const metadata: Metadata = {
   description: "Plataforma para bodas destino",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession(authOptions);
-
   return (
     <html lang="es">
       <body
@@ -55,27 +51,10 @@ export default async function RootLayout({
                 <MobileNav />
                 <div className="hidden rounded-full bg-white/80 px-4 py-2 text-sm text-zinc-500 shadow-sm lg:flex lg:items-center lg:gap-2">
                   <Sparkles className="h-4 w-4 text-amber-500" />
-                  Plataforma inteligente para bodas destino
+                  Versión demo sin autenticación
                 </div>
-                <div className="flex items-center gap-3 text-sm">
-                  {session?.user ? (
-                    <>
-                      <span className="hidden text-zinc-600 sm:inline">{session.user.email}</span>
-                      <form action="/api/auth/signout" method="post">
-                        <input type="hidden" name="callbackUrl" value="/auth/login" />
-                        <button className="rounded-full bg-white px-4 py-2 text-xs font-medium shadow-sm transition hover:bg-black hover:text-white" type="submit">
-                          Cerrar sesión
-                        </button>
-                      </form>
-                    </>
-                  ) : (
-                    <Link
-                      href="/auth/login"
-                      className="rounded-full bg-black px-4 py-2 text-xs font-medium text-white shadow-sm transition hover:bg-black/80"
-                    >
-                      Iniciar sesión
-                    </Link>
-                  )}
+                <div className="hidden items-center gap-3 text-xs font-medium text-emerald-600 lg:flex">
+                  Próximamente: login para planners y asistentes
                 </div>
               </div>
             </div>

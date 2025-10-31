@@ -1,13 +1,13 @@
 The Planners — Plataforma para bodas destino
 ================================================
 
-Stack: Next.js 16 (App Router), TypeScript, Tailwind v4, Prisma ORM (SQLite dev), NextAuth (credenciales + middleware), API Routes, OpenAI/Twilio opcional.
+Stack: Next.js 16 (App Router), TypeScript, Tailwind v4, Prisma ORM (SQLite dev), API Routes, OpenAI/Twilio opcional.
 
 Características incluidas (MVP):
 - Dashboard y secciones: Invitados, Vuelos, Hoteles, Contratos, Asientos, Álbum, Redes, Templates, Precios, Sitio (preview).
 - API para: generar códigos de invitación, buscar hoteles (mock), asistente IA (OpenAI), WhatsApp (Twilio).
-- Autenticación con NextAuth (credenciales) y protección de rutas (`/dashboard`, `/guests`, etc.).
 - Esquema de base de datos con Prisma para usuarios, empresas, bodas, invitados, hoteles, reservas, vuelos, contratos, pagos y más.
+  - Nota: la demo actual no requiere login; la autenticación se activará en versiones futuras.
 
 Requisitos
 ---------
@@ -21,8 +21,6 @@ Configuración rápida
 ```
 cp .env.example .env
 ```
-
-   - Genera un secreto para NextAuth (ejemplo: `openssl rand -base64 32`).
 
 2) Genera el cliente Prisma (ORM):
 
@@ -52,8 +50,6 @@ Semillas (demo)
 npm run db:seed
 ```
 
-- Usuario demo (credenciales): `planner@demo.test / demo1234`
-
 Rutas API útiles
 ---------------
 - POST `api/codes` → genera códigos para invitados. Body: `{ weddingId?, email? }`
@@ -63,6 +59,7 @@ Rutas API útiles
 
 Siguientes pasos sugeridos
 -------------------------
+- Añadir autenticación (NextAuth o similar) para planners, asistentes y parejas.
 - Mejorar onboarding de invitados (self-service) y roles (planner, asistente, pareja, invitado).
 - Conectar pagos reales (Stripe) y emisión de vuelos/hotel con proveedores.
 - Editor de contratos y firma electrónica (firmas, totales automáticos IA).
