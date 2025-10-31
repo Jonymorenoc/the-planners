@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+The Planners — Plataforma para bodas destino
+================================================
 
-## Getting Started
+Stack: Next.js 16 (App Router), TypeScript, Tailwind v4, Prisma ORM (SQLite dev), NextAuth (credenciales + middleware), API Routes, OpenAI/Twilio opcional.
 
-First, run the development server:
+Características incluidas (MVP):
+- Dashboard y secciones: Invitados, Vuelos, Hoteles, Contratos, Asientos, Álbum, Redes, Templates, Precios, Sitio (preview).
+- API para: generar códigos de invitación, buscar hoteles (mock), asistente IA (OpenAI), WhatsApp (Twilio).
+- Autenticación con NextAuth (credenciales) y protección de rutas (`/dashboard`, `/guests`, etc.).
+- Esquema de base de datos con Prisma para usuarios, empresas, bodas, invitados, hoteles, reservas, vuelos, contratos, pagos y más.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Requisitos
+---------
+- Node.js 18+
+- Opcional: cuenta OpenAI (para IA) y Twilio (para WhatsApp).
+
+Configuración rápida
+-------------------
+1) Copia variables de entorno y edítalas:
+
+```
+cp .env.example .env
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   - Genera un secreto para NextAuth (ejemplo: `openssl rand -base64 32`).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2) Genera el cliente Prisma (ORM):
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+npm run db:generate
+```
 
-## Learn More
+3) Crea la base de datos (si falla, puedes saltarlo y usar la app sin persistencia por ahora):
 
-To learn more about Next.js, take a look at the following resources:
+```
+npm run db:push
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4) Levanta el entorno de desarrollo:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+npm run dev
+```
 
-## Deploy on Vercel
+5) Abre http://localhost:3000
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Semillas (demo)
+--------------
+- Una vez creada la BD, puedes sembrar datos demo:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+npm run db:seed
+```
+
+- Usuario demo (credenciales): `planner@demo.test / demo1234`
+
+Rutas API útiles
+---------------
+- POST `api/codes` → genera códigos para invitados. Body: `{ weddingId?, email? }`
+- GET `api/hotels/search?q=cancun` → hoteles ejemplo (mock).
+- POST `api/assistant` → asistente IA. Body: `{ prompt }` (requiere `OPENAI_API_KEY`).
+- POST `api/whatsapp` → envía mensajes por WhatsApp vía Twilio (requiere credenciales).
+
+Siguientes pasos sugeridos
+-------------------------
+- Mejorar onboarding de invitados (self-service) y roles (planner, asistente, pareja, invitado).
+- Conectar pagos reales (Stripe) y emisión de vuelos/hotel con proveedores.
+- Editor de contratos y firma electrónica (firmas, totales automáticos IA).
+- Generador de sitio para invitados con CMS ligero y botón de preview en vivo.
+- Integrar almacenamiento de imágenes (S3, Cloudinary) para el álbum.
+
+Notas Prisma
+-----------
+- `npx prisma validate` confirma el esquema, pero si `npm run db:push` muestra “Schema engine error” vuelve a intentar tras reinstalar dependencias (`rm -rf node_modules && npm i`), o modifica `prisma.config.ts` para quitar la clave `engine`.
+
+Publicación en GitHub & preview
+-------------------------------
+1) Inicializa Git y enlaza el repositorio remoto (reemplaza `<tu-usuario>` si corresponde):
+
+```
+git init
+git add .
+git commit -m "feat: base de The Planners"
+git branch -M main
+git remote add origin https://github.com/<tu-usuario>/The-Planners-Software.git
+git push -u origin main
+```
+
+2) En GitHub, habilita GitHub Pages o conecta con Vercel para previsualizar la app:
+   - **Vercel**: Importa el repo “The Planners Software”, agrega variables de entorno (`NEXTAUTH_SECRET`, `OPENAI_API_KEY`, etc.) y haz deploy; la URL generada servirá como vista previa.
+   - **GitHub Pages**: Ejecuta `npm run build` y publica `/out` (usa `next export` si planeas un sitio estático; para pleno soporte SSR se recomienda Vercel).
+
+3) Añade un README en GitHub con capturas (`npm run dev` para generar screenshots) y, opcionalmente, configura un workflow de CI con GitHub Actions para ejecutar `npm run build` en cada push.
