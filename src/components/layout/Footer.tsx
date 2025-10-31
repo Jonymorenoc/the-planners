@@ -3,16 +3,19 @@ import { Button } from "@/components/ui/button";
 
 export function Footer() {
   return (
-    <footer className="mt-20 border-t border-white/30 bg-white/30 backdrop-blur-xl">
+    <footer className="mt-20 border-t border-border/40 bg-white/75 backdrop-blur-xl">
       <div className="container flex flex-col gap-8 py-12 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-3">
-          <span className="flex h-12 w-12 items-center justify-center rounded-3xl bg-white/80 shadow-glow">
-            <img
-              src="/the-planners-logo.svg"
-              alt="The Planners"
-              className="h-9 w-9"
-              loading="lazy"
-            />
+          <span className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-3xl bg-white/90 shadow-glow">
+            <picture>
+              <source srcSet="/the-planners-logo.svg" type="image/svg+xml" />
+              <img
+                src="/the-planners-logo.png"
+                alt="The Planners"
+                className="h-10 w-10 object-contain"
+                loading="lazy"
+              />
+            </picture>
           </span>
           <div>
             <p className="font-display text-xl text-foreground">The Planners</p>
@@ -62,7 +65,7 @@ export function Footer() {
           </div>
         </div>
       </div>
-      <div className="border-t border-white/30 py-4">
+      <div className="border-t border-border/40 py-4">
         <div className="container flex flex-col items-center justify-between gap-2 text-xs text-foreground/40 md:flex-row">
           <p>© {new Date().getFullYear()} The Planners · Creado para planners visionarios.</p>
           <div className="flex gap-4">

@@ -15,32 +15,32 @@ const config: Config = {
     },
     extend: {
       colors: {
-        background: "hsl(330 40% 98%)",
-        foreground: "hsl(330 15% 20%)",
+        background: "hsl(326 53% 97%)",
+        foreground: "hsl(330 22% 15%)",
         primary: {
-          DEFAULT: "hsl(340 65% 75%)",
-          foreground: "hsl(340 30% 20%)",
-          glow: "hsl(340 70% 85%)",
+          DEFAULT: "hsl(329 84% 54%)",
+          foreground: "hsl(0 0% 100%)",
+          glow: "hsl(329 88% 70%)",
         },
         secondary: {
-          DEFAULT: "hsl(270 40% 85%)",
-          foreground: "hsl(270 30% 25%)",
+          DEFAULT: "hsl(272 46% 74%)",
+          foreground: "hsl(273 32% 20%)",
         },
         accent: {
-          DEFAULT: "hsl(25 75% 85%)",
-          foreground: "hsl(20 40% 20%)",
+          DEFAULT: "hsl(24 84% 64%)",
+          foreground: "hsl(18 45% 20%)",
         },
         muted: {
-          DEFAULT: "hsl(150 30% 92%)",
-          foreground: "hsl(150 25% 30%)",
+          DEFAULT: "hsl(152 35% 88%)",
+          foreground: "hsl(152 28% 26%)",
         },
         card: {
-          DEFAULT: "hsla(330, 65%, 98%, 0.8)",
-          foreground: "hsl(330 20% 25%)",
+          DEFAULT: "hsla(0, 0%, 100%, 0.92)",
+          foreground: "hsl(330 24% 18%)",
         },
-        border: "hsla(330, 30%, 80%, 0.5)",
-        input: "hsla(330, 30%, 85%, 0.6)",
-        ring: "hsl(340 65% 65%)",
+        border: "hsla(329, 70%, 72%, 0.5)",
+        input: "hsla(329, 70%, 86%, 0.65)",
+        ring: "hsl(329 84% 55%)",
       },
       borderRadius: {
         lg: "1.25rem",
@@ -53,15 +53,15 @@ const config: Config = {
       },
       backgroundImage: {
         "hero-gradient":
-          "radial-gradient(circle at top left, hsla(340, 70%, 85%, 0.75), transparent 55%), radial-gradient(circle at bottom right, hsla(150, 40%, 85%, 0.7), transparent 55%)",
+          "radial-gradient(circle at top left, hsla(329, 80%, 90%, 0.7), transparent 55%), radial-gradient(circle at bottom right, hsla(152, 45%, 88%, 0.6), transparent 55%)",
         "card-gradient":
-          "linear-gradient(135deg, hsla(340, 70%, 92%, 0.95), hsla(270, 45%, 92%, 0.8))",
+          "linear-gradient(135deg, hsla(329, 85%, 96%, 0.95), hsla(272, 45%, 94%, 0.88))",
         "accent-gradient":
-          "linear-gradient(120deg, hsla(25, 80%, 90%, 0.95), hsla(150, 35%, 92%, 0.85))",
+          "linear-gradient(120deg, hsla(24, 86%, 82%, 0.95), hsla(152, 38%, 90%, 0.88))",
       },
       boxShadow: {
-        glow: "0 15px 45px -20px hsla(340, 65%, 50%, 0.4)",
-        glass: "0 8px 30px -12px hsla(330, 60%, 40%, 0.25)",
+        glow: "0 18px 48px -20px hsla(329, 85%, 48%, 0.45)",
+        glass: "0 10px 36px -18px hsla(332, 40%, 35%, 0.25)",
         inset: "inset 0 1px 0 0 hsla(0,0%,100%,0.3)",
       },
       backdropBlur: {

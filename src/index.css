@@ -25,11 +25,11 @@
 
 @layer utilities {
   .glass-panel {
-    @apply bg-card backdrop-blur-glass border border-white/40 shadow-glass;
+    @apply bg-card backdrop-blur-glass border border-border shadow-glass;
   }
 
   .glass-button {
-    @apply bg-white/40 text-foreground shadow-inset border border-white/30 backdrop-blur-glass;
+    @apply bg-white/65 text-foreground shadow-inset border border-border/60 backdrop-blur-glass;
   }
 
   .hero-button {
