@@ -7,6 +7,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default defineConfig({
+  // Base path for GitHub Pages deployment
+  // Ensures built asset URLs resolve under /the-planners/
+  base: "/the-planners/",
   plugins: [react()],
   resolve: {
     alias: {
