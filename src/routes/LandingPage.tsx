@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
@@ -33,11 +34,11 @@ function HeroSection() {
           cada detalle y sorprende a tus parejas.
         </p>
         <div className="flex flex-wrap items-center gap-4">
-          <Button variant="hero" size="lg" className="shadow-glow">
-            Explorar dashboard
+          <Button asChild variant="hero" size="lg" className="shadow-glow">
+            <Link to="/dashboard">Explorar dashboard</Link>
           </Button>
-          <Button variant="glass" size="lg">
-            Ver demo para planners
+          <Button asChild variant="glass" size="lg">
+            <Link to="/sitio-web">Ver demo para planners</Link>
           </Button>
         </div>
         <div className="mt-8 grid grid-cols-3 gap-6">

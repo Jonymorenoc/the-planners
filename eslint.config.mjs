@@ -6,7 +6,7 @@ import globals from "globals";
 
 export default [
   {
-    ignores: ["dist", "node_modules", "src_next_backup/**"],
+    ignores: ["dist", "node_modules", ".next/**", "src_next_backup/**"],
   },
   js.configs.recommended,
   {
