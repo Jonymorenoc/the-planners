@@ -11,6 +11,7 @@ import { SeatingPlannerPage } from "@/routes/SeatingPlannerPage";
 import { ContractsPage } from "@/routes/ContractsPage";
 import { OnboardingPage } from "@/routes/OnboardingPage";
 import { LoginPage } from "@/routes/LoginPage";
+import { AIDesignerPage } from "@/routes/AIDesignerPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/sitio-web" element={<WebsiteBuilderPage />} />
           <Route path="/planificador" element={<SeatingPlannerPage />} />
           <Route path="/contratos" element={<ContractsPage />} />
+          <Route path="/disenador-ia" element={<AIDesignerPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
