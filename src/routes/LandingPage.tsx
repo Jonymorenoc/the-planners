@@ -179,14 +179,10 @@ function HeroSection() {
           The Planners · Bodas destino
         </span>
         <h1 className="font-display text-4xl leading-tight text-foreground md:text-5xl lg:text-6xl">
-          Diseña experiencias destino con{" "}
-          <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
-            procesos de alto impacto
-          </span>
+          Suite para wedding planners de <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">bodas destino</span>
         </h1>
         <p className="text-lg text-foreground/70 md:text-xl">
-          Coordina invitados, logística y presupuesto desde una plataforma pastel que piensa como
-          tu equipo: datos claros, automatizaciones listas y branding impecable para cada pareja.
+          Mejora tus servicios y métodos: centraliza invitados y presupuesto, diseña propuestas visuales y automatiza el flujo de trabajo para bodas en hoteles.
         </p>
         <div className="flex flex-wrap items-center gap-4">
           <Button asChild variant="hero" size="lg" className="shadow-glow">
@@ -482,8 +478,8 @@ function CtaSection() {
         </div>
         <div className="relative h-full min-h-[420px]">
           <img
-            src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1200"
-            alt="Planner organizando decoración floral en un evento destino"
+            src="https://images.unsplash.com/photo-1504805572947-34fad45aed93?auto=format&fit=crop&w=1200&q=80"
+            alt="Planner organizando decoración floral en hotel para boda destino"
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-br from-background/10 via-background/20 to-primary/25" />
