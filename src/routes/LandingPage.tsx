@@ -13,8 +13,8 @@ import { features, heroStats } from "@/data/mockData";
 
 const heroMedia = {
   image:
-    "https://images.pexels.com/photos/4963906/pexels-photo-4963906.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1600",
-  alt: "Pareja celebrando su boda destino junto a la playa con decoración floral",
+    "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=80",
+  alt: "Montaje de recepción de boda en salón de hotel elegante",
   card: {
     subtitle: "Proyecto en curso",
     title: "Boda Riviera Maya · Agosto",
@@ -47,7 +47,7 @@ const suiteModules = [
       "Segmentación por rol y etiqueta",
     ],
     image:
-      "https://images.pexels.com/photos/2144553/pexels-photo-2144553.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1200",
+      "https://images.unsplash.com/photo-1521335629791-ce4aec67dd47?auto=format&fit=crop&w=1200&q=80",
     imageAlt: "Montaje de mesa elegante con centros florales para boda destino",
   },
   {
@@ -62,7 +62,7 @@ const suiteModules = [
       "Panel de tareas para tu staff",
     ],
     image:
-      "https://images.pexels.com/photos/461345/pexels-photo-461345.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1200",
+      "https://images.unsplash.com/photo-1530023367847-a683933f4173?auto=format&fit=crop&w=1200&q=80",
     imageAlt: "Equipo de planners revisando planos y laptops en un salón moderno",
   },
   {
@@ -77,7 +77,7 @@ const suiteModules = [
       "Simulador de presupuesto por destino",
     ],
     image:
-      "https://images.pexels.com/photos/313707/pexels-photo-313707.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1200",
+      "https://images.unsplash.com/photo-1521335629791-ce4aec67dd47?auto=format&fit=crop&w=1200&q=80",
     imageAlt: "Planner revisando gráficos financieros en una tableta",
   },
 ];
@@ -117,8 +117,8 @@ const testimonials = [
     role: "Fundadora",
     company: "Caribe Vows",
     image:
-      "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=400",
-    imageAlt: "Retrato profesional de una wedding planner sonriente",
+      "https://images.unsplash.com/photo-1521146764736-56c929d59c87?auto=format&fit=crop&w=400&q=80",
+    imageAlt: "Retrato profesional de planner en hotel",
   },
   {
     quote:
@@ -127,8 +127,8 @@ const testimonials = [
     role: "Director de operaciones",
     company: "Latitude Weddings",
     image:
-      "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=400",
-    imageAlt: "Retrato profesional de un wedding planner masculino con traje",
+      "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=400&q=80",
+    imageAlt: "Retrato profesional de planner masculino",
   },
 ];
 
@@ -176,7 +176,7 @@ function HeroSection() {
     <section className="container grid items-start gap-12 lg:grid-cols-[1.05fr,0.95fr]">
       <div className="space-y-6">
         <span className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-white/70 px-4 py-2 text-xs uppercase tracking-[0.35em] text-foreground/60">
-          The Planners · Bodas destino como startup
+          The Planners · Bodas destino
         </span>
         <h1 className="font-display text-4xl leading-tight text-foreground md:text-5xl lg:text-6xl">
           Diseña experiencias destino con{" "}
@@ -211,6 +211,7 @@ function HeroSection() {
             src={heroMedia.image}
             alt={heroMedia.alt}
             className="h-full w-full min-h-[520px] object-cover"
+            loading="eager"
           />
           <span className="absolute left-8 top-8 inline-flex items-center gap-2 rounded-full bg-white/85 px-4 py-2 text-xs uppercase tracking-[0.35em] text-primary shadow-glass">
             <Sparkles className="h-4 w-4" /> Suite en vivo
@@ -310,22 +311,22 @@ function SuiteShowcase() {
           inolvidables sin sacrificar control ni creatividad.
         </p>
       </div>
-      <div className="grid gap-6 lg:grid-cols-3">
-        {suiteModules.map((module) => (
-          <Card
-            key={module.id}
-            className="flex h-full flex-col overflow-hidden rounded-[2.6rem] border border-white/60 bg-gradient-to-b from-white/92 via-white/85 to-primary/10"
-          >
-            <div className="relative h-56 w-full overflow-hidden">
-              <img
-                src={module.image}
-                alt={module.imageAlt}
-                className="h-full w-full object-cover"
-              />
-              <span className="absolute left-5 top-5 inline-flex items-center rounded-full bg-white/85 px-3 py-1 text-xs uppercase tracking-[0.35em] text-primary shadow-glass">
-                {module.badge}
-              </span>
-            </div>
+          <div className="grid gap-6 lg:grid-cols-3">
+            {suiteModules.map((module) => (
+              <Card
+                key={module.id}
+                className="flex h-full flex-col overflow-hidden rounded-[2.6rem] border border-white/60 bg-gradient-to-b from-white/92 via-white/85 to-primary/10"
+              >
+                <div className="relative h-64 w-full overflow-hidden rounded-t-[2.6rem]">
+                  <img
+                    src={module.image}
+                    alt={module.imageAlt}
+                    className="h-full w-full object-cover"
+                  />
+                  <span className="absolute left-5 top-5 inline-flex items-center rounded-full bg-white/85 px-3 py-1 text-xs uppercase tracking-[0.35em] text-primary shadow-glass">
+                    {module.badge}
+                  </span>
+                </div>
             <CardContent className="flex flex-1 flex-col gap-4 p-6">
               <CardTitle className="text-foreground">{module.title}</CardTitle>
               <CardDescription className="text-foreground/65">

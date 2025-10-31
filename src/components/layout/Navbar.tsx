@@ -38,21 +38,10 @@ export function Navbar() {
     >
       <nav className="container flex items-center justify-between py-4">
         <NavLink to="/" className="flex items-center gap-3">
-          <span className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-3xl bg-white/95 shadow-glow">
-            <picture>
-              <source srcSet="/the-planners-logo.svg" type="image/svg+xml" />
-              <img
-                src="/the-planners-logo.png"
-                alt="The Planners"
-                className="h-10 w-10 object-contain"
-                loading="lazy"
-              />
-            </picture>
-          </span>
           <div className="flex flex-col leading-tight">
-            <span className="font-display text-lg text-foreground">The Planners</span>
-            <span className="text-xs tracking-[0.35em] text-foreground/60">
-              DESTINATION SUITE
+            <span className="font-display text-xl text-foreground md:text-2xl">The Planners</span>
+            <span className="text-[0.65rem] tracking-[0.35em] text-foreground/60">
+              BODAS DESTINO
             </span>
           </div>
         </NavLink>
@@ -96,8 +85,14 @@ export function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <Button variant="glass" size="sm" asChild>
-            <NavLink to="/login">Iniciar sesión</NavLink>
+          <Button variant="glass" size="icon" asChild aria-label="Iniciar sesión">
+            <NavLink to="/login">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                <polyline points="10 17 15 12 10 7"/>
+                <line x1="15" y1="12" x2="3" y2="12"/>
+              </svg>
+            </NavLink>
           </Button>
           <Button variant="hero" size="sm" className="shadow-glow">
             Solicitar demo
