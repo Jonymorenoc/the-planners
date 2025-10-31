@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light only;
+}
+
+@layer base {
+  html {
+    font-family: theme("fontFamily.sans");
+    background-color: theme("colors.background");
+  }
+
+  body {
+    @apply min-h-screen bg-background text-foreground;
+    background-image: theme("backgroundImage.hero-gradient");
+    background-attachment: fixed;
+  }
+
+  a {
+    @apply transition-colors duration-200 ease-out;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-card backdrop-blur-glass border border-white/40 shadow-glass;
+  }
+
+  .glass-button {
+    @apply bg-white/40 text-foreground shadow-inset border border-white/30 backdrop-blur-glass;
+  }
+
+  .hero-button {
+    @apply text-primary-foreground font-medium shadow-glow bg-gradient-to-r from-primary to-primary-glow;
+  }
+}
