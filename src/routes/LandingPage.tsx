@@ -1,149 +1,171 @@
-import { useEffect, useMemo, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import {
+  ArrowRight,
+  CalendarClock,
+  CheckCircle2,
+  PartyPopper,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardTitle } from "@/components/ui/card";
-import { features, heroStats, ctaHighlights } from "@/data/mockData";
+import { features, heroStats } from "@/data/mockData";
 
-type HeroSlide = {
-  id: string;
-  badge: string;
-  title: string;
-  description: string;
-  image: string;
-  imageAlt: string;
-  highlights: Array<{ title: string; details: string }>;
-  summary: { title: string; points: string[] };
+const heroMedia = {
+  image:
+    "https://images.pexels.com/photos/4963906/pexels-photo-4963906.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1600",
+  alt: "Pareja celebrando su boda destino junto a la playa con decoración floral",
+  card: {
+    subtitle: "Proyecto en curso",
+    title: "Boda Riviera Maya · Agosto",
+    stats: [
+      { label: "Invitados confirmados", value: "86" },
+      { label: "Semana destino", value: "04-08 OCT" },
+      { label: "Estado del presupuesto", value: "72% asignado" },
+    ],
+  },
 };
 
-const heroSlides: HeroSlide[] = [
+const trustMarks = [
+  "Riviera Experience",
+  "Casa Bonita Group",
+  "Sayulita Waves",
+  "Isla Mujeres Co.",
+  "Merida Tales",
+];
+
+const suiteModules = [
   {
-    id: "slide-dashboard",
-    badge: "Dashboard en vivo",
-    title: "Controla métricas y alertas en tiempo real",
+    id: "module-guests",
+    badge: "Experiencia de invitados",
+    title: "RSVP inteligente y comunicaciones multicanal",
     description:
-      "Paneles ejecutivos con KPIs de invitados, vuelos y presupuesto listos para presentar a tus parejas.",
-    image:
-      "https://images.pexels.com/photos/8100067/pexels-photo-8100067.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    imageAlt: "Planners revisando métricas en un portátil para una boda destino",
-    highlights: [
-      {
-        title: "Indicadores 360°",
-        details: "Confirma RSVP, vuelos y pagos desde un tablero único.",
-      },
-      {
-        title: "Alertas predictivas",
-        details: "Recibe avisos cuando una categoría supera el 80% del presupuesto.",
-      },
-      {
-        title: "Historia compartible",
-        details: "Exporta reportes boutique para tus parejas o socios.",
-      },
+      "Automatiza confirmaciones, itinerarios y mensajes VIP con branding impecable y soporte IA en cada paso.",
+    bullets: [
+      "Landing personalizada multi idioma",
+      "Itinerarios dinámicos con recordatorios",
+      "Segmentación por rol y etiqueta",
     ],
-    summary: {
-      title: "Panel ejecutivo",
-      points: [
-        "48 invitados confirmados",
-        "32 vuelos con itinerario publicado",
-        "$24,500 USD registrados",
-      ],
-    },
+    image:
+      "https://images.pexels.com/photos/2144553/pexels-photo-2144553.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1200",
+    imageAlt: "Montaje de mesa elegante con centros florales para boda destino",
   },
   {
-    id: "slide-seating",
-    badge: "Planificador visual",
-    title: "Organiza mesas y seating cards en minutos",
+    id: "module-operations",
+    badge: "Operaciones & seating",
+    title: "Visualiza logística, aforos y planos en minutos",
     description:
-      "Simula layouts para recepción, asigna familias y genera tarjetas con códigos QR para tu staff.",
-    image:
-      "https://images.pexels.com/photos/2306286/pexels-photo-2306286.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    imageAlt: "Montaje de mesa elegante listo para recepción de boda",
-    highlights: [
-      {
-        title: "Drag & drop intuitivo",
-        details: "Reacomoda invitados y valida capacidad por mesa en tiempo real.",
-      },
-      {
-        title: "Códigos QR por invitado",
-        details: "Entrega seating cards con verificación rápida el día del evento.",
-      },
-      {
-        title: "Briefs de producción",
-        details: "Comparte PDFs y CSV con tu equipo de logística.",
-      },
+      "Coordina seating charts, habitaciones y traslados con tableros colaborativos y alertas por capacidad.",
+    bullets: [
+      "Planificador drag & drop por mesa",
+      "Bloques de hotel y vuelos sincronizados",
+      "Panel de tareas para tu staff",
     ],
-    summary: {
-      title: "Seating planner",
-      points: ["Mesas 1-6 equilibradas", "26 invitados VIP", "Acceso hostess en modo demo"],
-    },
+    image:
+      "https://images.pexels.com/photos/461345/pexels-photo-461345.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1200",
+    imageAlt: "Equipo de planners revisando planos y laptops en un salón moderno",
   },
   {
-    id: "slide-ai",
-    badge: "IA creativa",
-    title: "Genera sitios destino y contratos asistidos",
+    id: "module-insights",
+    badge: "Insights & contratos",
+    title: "Analítica financiera y legal con IA bilingüe",
     description:
-      "Activa prompts inteligentes para crear webs de pareja y revisar contratos con insights automáticos.",
-    image:
-      "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    imageAlt: "Equipo creativo diseñando materiales digitales para una boda destino",
-    highlights: [
-      {
-        title: "Sitios personalizados",
-        details: "Crea experiencias RSVP con branding pastel tropical.",
-      },
-      {
-        title: "Análisis legal guiado",
-        details: "Identifica montos, fechas clave y cláusulas críticas.",
-      },
-      {
-        title: "Bundles demo",
-        details: "Comparte propuestas visuales y contratos listos para revisión.",
-      },
+      "Controla presupuesto, contratos y entregables con resúmenes accionables, alertas y escenarios proyectados.",
+    bullets: [
+      "Reportes ejecutivos listos para exportar",
+      "Revisión asistida de contratos",
+      "Simulador de presupuesto por destino",
     ],
-    summary: {
-      title: "Suite IA",
-      points: ["Landing generada en 18s", "Contrato hotel analizado", "5 prompts sugeridos"],
-    },
+    image:
+      "https://images.pexels.com/photos/313707/pexels-photo-313707.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1200",
+    imageAlt: "Planner revisando gráficos financieros en una tableta",
   },
 ];
 
-const mockupPreviews = [
+const workflowSteps = [
   {
-    id: "mock-dashboard",
-    image:
-      "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    imageAlt: "Planner revisando un panel digital en laptop",
-    badge: "Dashboard OS",
-    title: "Visibilidad total de cada boda destino",
-    description: "KPIs actualizados, plantillas inteligentes y flujo de trabajo por equipos.",
+    step: "01",
+    title: "Discovery turbo",
+    description:
+      "Importa leads, plantillas y contratos en cuestión de minutos con nuestro asistente y presets por destino.",
   },
   {
-    id: "mock-onboarding",
-    image:
-      "https://images.pexels.com/photos/3184405/pexels-photo-3184405.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    imageAlt: "Equipo colaborando en un tablero con notas",
-    badge: "Onboarding guiado",
-    title: "Briefs estratégicos en cuestión de minutos",
-    description: "Define estilo, bloqueos de hotel y logística para familias y VIPs.",
+    step: "02",
+    title: "Diseño de experiencia",
+    description:
+      "Define moodboard, agenda y vendors clave con tableros compartibles y notas contextualizadas.",
   },
   {
-    id: "mock-mobile",
-    image:
-      "https://images.pexels.com/photos/5082577/pexels-photo-5082577.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    imageAlt: "Pareja confirmando asistencia desde el móvil",
-    badge: "Experiencia mobile",
-    title: "Comparte itinerarios y códigos QR al instante",
-    description: "Notificaciones smart y contenido pastel listo para invitados conectados.",
+    step: "03",
+    title: "Automations",
+    description:
+      "Activa campañas de confirmación, recordatorios y tareas para el equipo con lógica low-code.",
   },
+  {
+    step: "04",
+    title: "Entrega & métricas",
+    description:
+      "Entrega reportes ejecutivos, álbumes y contratos firmados en un hub listo para vender tu próxima boda.",
+  },
+];
+
+const testimonials = [
+  {
+    quote:
+      "Escalamos de 12 a 32 bodas destino al año manteniendo la experiencia boutique. Las automatizaciones y reportes nos permiten tomar decisiones en horas, no semanas.",
+    name: "María Torres",
+    role: "Fundadora",
+    company: "Caribe Vows",
+    image:
+      "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=400",
+    imageAlt: "Retrato profesional de una wedding planner sonriente",
+  },
+  {
+    quote:
+      "The Planners nos ayudó a coordinar invitados en tres países y mantener contratos hoteleros bajo control. La suite es intuitiva y lista para equipos híbridos.",
+    name: "Álvaro Medina",
+    role: "Director de operaciones",
+    company: "Latitude Weddings",
+    image:
+      "https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=400",
+    imageAlt: "Retrato profesional de un wedding planner masculino con traje",
+  },
+];
+
+const servicePromises = [
+  {
+    icon: ShieldCheck,
+    title: "Datos seguros",
+    description: "Infraestructura con cifrado end-to-end y backups automáticos en la región.",
+  },
+  {
+    icon: CalendarClock,
+    title: "Onboarding express",
+    description: "Implementación guiada en 10 días con materiales listos para tu equipo.",
+  },
+  {
+    icon: PartyPopper,
+    title: "Experiencias memorables",
+    description: "Plantillas pastel, storytelling y branding que enamoran a cada pareja.",
+  },
+];
+
+const ctaChecklist = [
+  "Playbook completo de bodas destino",
+  "Acceso a comunidad privada de planners",
+  "Plantillas editables para tu próxima propuesta",
 ];
 
 export function LandingPage() {
   return (
-    <div className="space-y-24 pb-20 pt-12 lg:pt-24">
+    <div className="space-y-24 pb-24 pt-12 lg:pt-20">
       <HeroSection />
-      <FeaturesSection />
-      <MockupsSection />
+      <TrustBar />
+      <FeatureHighlights />
+      <SuiteShowcase />
+      <WorkflowSection />
+      <TestimonialsSection />
+      <GuaranteeSection />
       <CtaSection />
     </div>
   );
@@ -151,164 +173,118 @@ export function LandingPage() {
 
 function HeroSection() {
   return (
-    <section className="container flex flex-col-reverse items-center gap-12 lg:flex-row">
-      <div className="flex-1 space-y-6">
-        <span className="inline-flex items-center rounded-full border border-border/60 bg-white/60 px-4 py-2 text-xs uppercase tracking-[0.4em] text-foreground/60 shadow-inner">
-          The Planners · Bodas Destino
+    <section className="container grid items-start gap-12 lg:grid-cols-[1.05fr,0.95fr]">
+      <div className="space-y-6">
+        <span className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-white/70 px-4 py-2 text-xs uppercase tracking-[0.35em] text-foreground/60">
+          The Planners · Bodas destino como startup
         </span>
         <h1 className="font-display text-4xl leading-tight text-foreground md:text-5xl lg:text-6xl">
-          Diseña bodas destino memorables con{" "}
+          Diseña experiencias destino con{" "}
           <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
-            inteligencia y estilo
+            procesos de alto impacto
           </span>
         </h1>
         <p className="text-lg text-foreground/70 md:text-xl">
-          Coordina invitados, presupuesto, experiencias y proveedores desde un
-          panel elegante con automatizaciones locales y datos seguros. Personaliza
-          cada detalle y sorprende a tus parejas.
+          Coordina invitados, logística y presupuesto desde una plataforma pastel que piensa como
+          tu equipo: datos claros, automatizaciones listas y branding impecable para cada pareja.
         </p>
         <div className="flex flex-wrap items-center gap-4">
           <Button asChild variant="hero" size="lg" className="shadow-glow">
-            <Link to="/dashboard">Explorar dashboard</Link>
+            <Link to="/onboarding">Solicitar demo guiada</Link>
           </Button>
           <Button asChild variant="glass" size="lg">
-            <Link to="/sitio-web">Ver demo para planners</Link>
+            <Link to="/dashboard">Ver producto en vivo</Link>
           </Button>
         </div>
-        <div className="mt-8 grid grid-cols-3 gap-6">
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
           {heroStats.map((stat) => (
             <div key={stat.label} className="glass-panel rounded-2xl p-4 text-center shadow-glass">
               <p className="font-display text-3xl text-primary">{stat.value}</p>
-              <p className="text-xs uppercase tracking-wide text-foreground/60">
-                {stat.label}
-              </p>
+              <p className="text-xs uppercase tracking-wide text-foreground/60">{stat.label}</p>
             </div>
           ))}
         </div>
       </div>
-      <div className="flex-1">
-        <HeroSlider />
+      <div className="relative">
+        <div className="glass-panel relative overflow-hidden rounded-[3rem] border border-white/60 shadow-glow">
+          <img
+            src={heroMedia.image}
+            alt={heroMedia.alt}
+            className="h-full w-full min-h-[520px] object-cover"
+          />
+          <span className="absolute left-8 top-8 inline-flex items-center gap-2 rounded-full bg-white/85 px-4 py-2 text-xs uppercase tracking-[0.35em] text-primary shadow-glass">
+            <Sparkles className="h-4 w-4" /> Suite en vivo
+          </span>
+          <div className="absolute inset-x-6 bottom-6 rounded-3xl bg-white/85 p-6 text-sm text-foreground shadow-xl backdrop-blur-xl">
+            <p className="text-xs uppercase tracking-[0.35em] text-foreground/45">
+              {heroMedia.card.subtitle}
+            </p>
+            <p className="font-display text-2xl text-foreground">{heroMedia.card.title}</p>
+            <ul className="mt-4 grid gap-4 sm:grid-cols-3">
+              {heroMedia.card.stats.map((stat) => (
+                <li key={stat.label} className="space-y-1">
+                  <p className="text-xs uppercase tracking-wide text-foreground/45">{stat.label}</p>
+                  <p className="text-sm font-semibold text-foreground">{stat.value}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
 
-function HeroSlider() {
-  const [index, setIndex] = useState(0);
-  const active = heroSlides[index];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % heroSlides.length);
-    }, 6000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const indicators = useMemo(
-    () =>
-      heroSlides.map((slide, slideIndex) => (
-        <button
-          type="button"
-          key={slide.id}
-          onClick={() => setIndex(slideIndex)}
-          className={`h-2 w-10 rounded-full transition ${
-            slideIndex === index ? "bg-primary" : "bg-white/50 hover:bg-white/70"
-          }`}
-          aria-label={`Mostrar ${slide.badge}`}
-        />
-      )),
-    [index],
-  );
-
+function TrustBar() {
   return (
-    <div className="relative">
-      <div className="glass-panel relative overflow-hidden rounded-[2.8rem] border border-white/50 shadow-glow">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={active.id}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.5 }}
-            className="grid h-full min-h-[520px] w-full bg-white/40 lg:grid-cols-[1.2fr,0.9fr]"
-          >
-            <div className="relative flex flex-col justify-between gap-8 bg-gradient-to-br from-white/95 via-white/90 to-primary/10 p-8 sm:p-10 md:p-12">
-              <div className="space-y-5">
-                <span className="inline-flex items-center rounded-full border border-primary/30 bg-white px-4 py-1 text-xs uppercase tracking-[0.4em] text-primary">
-                  {active.badge}
-                </span>
-                <h2 className="font-display text-3xl text-foreground md:text-[2.1rem]">{active.title}</h2>
-                <p className="text-base text-foreground/65 md:text-lg">{active.description}</p>
-              </div>
-              <ul className="space-y-4">
-                {active.highlights.map((item) => (
-                  <li key={item.title} className="flex items-start gap-3 rounded-3xl bg-white/80 p-4 shadow-inner">
-                    <span className="mt-1 flex h-8 w-8 items-center justify-center rounded-2xl bg-primary/15 text-primary">
-                      <CheckCircle2 className="h-4 w-4" />
-                    </span>
-                    <div>
-                      <p className="font-semibold text-foreground">{item.title}</p>
-                      <p className="text-sm text-foreground/60">{item.details}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="relative overflow-hidden bg-white/40 p-6 md:p-8">
-              <div className="relative h-full min-h-[340px] overflow-hidden rounded-[2.4rem] shadow-lg">
-                <img
-                  src={active.image}
-                  alt={active.imageAlt}
-                  className="h-full w-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/30" />
-              </div>
-              <div className="absolute bottom-8 left-1/2 w-[calc(100%-3rem)] -translate-x-1/2 rounded-3xl bg-white/85 p-4 text-sm text-foreground shadow-xl backdrop-blur-lg md:p-5">
-                <p className="text-xs uppercase tracking-[0.35em] text-foreground/45">
-                  {active.summary.title}
-                </p>
-                <ul className="mt-2 space-y-1.5 text-xs text-foreground/70 md:text-sm">
-                  {active.summary.points.map((point) => (
-                    <li key={point}>• {point}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+    <section className="container">
+      <div className="glass-panel flex flex-wrap items-center justify-between gap-6 rounded-3xl px-6 py-5 shadow-sm">
+        <p className="text-xs uppercase tracking-[0.4em] text-foreground/50">
+          CONFIAN EN THE PLANNERS
+        </p>
+        <div className="flex flex-wrap items-center gap-6 text-sm font-medium text-foreground/60">
+          {trustMarks.map((brand) => (
+            <span key={brand} className="tracking-[0.2em]">
+              {brand}
+            </span>
+          ))}
+        </div>
       </div>
-      <div className="absolute -bottom-16 left-1/2 flex -translate-x-1/2 items-center gap-3 rounded-full bg-white/85 px-5 py-3 shadow-glass backdrop-blur-xl">
-        {indicators}
-      </div>
-    </div>
+    </section>
   );
 }
 
-function FeaturesSection() {
+function FeatureHighlights() {
   return (
-    <section className="container space-y-12">
-      <div className="mx-auto max-w-2xl text-center">
+    <section className="container space-y-10">
+      <div className="mx-auto max-w-3xl text-center">
         <h2 className="font-display text-3xl text-foreground md:text-4xl">
-          Un ecosistema completo para{" "}
+          Todo lo que necesitas para{" "}
           <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
-            wedding planners
+            dirigir bodas destino
           </span>{" "}
-          de clase mundial
+          como una startup creativa
         </h2>
         <p className="mt-4 text-base text-foreground/70 md:text-lg">
-          Estructura cada etapa del proyecto con paneles visuales, automatización
-          y experiencias memorables para tus parejas y sus invitados.
+          Conecta datos, equipos y momentos especiales en un solo lugar. Personaliza la experiencia
+          sin perder control operativo ni financiero.
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {features.map((feature) => (
-          <Card key={feature.name} className="h-full animate-[float_12s_ease-in-out_infinite]">
-            <CardContent className="space-y-4">
+          <Card key={feature.name} className="h-full rounded-[2.2rem] border border-white/50 bg-white/85">
+            <CardContent className="space-y-4 p-6">
               <feature.icon className="h-10 w-10 rounded-2xl bg-primary/20 p-2 text-primary shadow-glow" />
               <CardTitle>{feature.name}</CardTitle>
-              <CardDescription>{feature.description}</CardDescription>
-              <Button variant="ghost" className="group w-fit px-0 text-primary hover:text-primary">
-                Ver más detalles
+              <CardDescription className="text-foreground/65">
+                {feature.description}
+              </CardDescription>
+              <Button
+                variant="ghost"
+                className="group w-fit px-0 text-primary hover:text-primary"
+                size="sm"
+              >
+                Conocer módulo
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </CardContent>
@@ -319,45 +295,53 @@ function FeaturesSection() {
   );
 }
 
-function MockupsSection() {
+function SuiteShowcase() {
   return (
-    <section className="container space-y-10">
-      <div className="mx-auto max-w-2xl text-center">
-        <span className="inline-flex items-center rounded-full border border-border/60 bg-white/60 px-4 py-2 text-xs uppercase tracking-[0.35em] text-foreground/60">
-          Demo visual
+    <section className="container space-y-12">
+      <div className="mx-auto max-w-3xl text-center">
+        <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-white/60 px-4 py-2 text-xs uppercase tracking-[0.35em] text-foreground/60">
+          Suite modular
         </span>
         <h2 className="mt-4 font-display text-3xl text-foreground md:text-4xl">
-          Presenta experiencias impecables con mockups profesionales
+          Haz que tu operación brille con entregables impecables y datos confiables
         </h2>
-        <p className="mt-3 text-base text-foreground/70">
-          Usa estas pantallas de referencia para mostrar el workflow completo de The Planners a tus clientes.
+        <p className="mt-3 text-base text-foreground/70 md:text-lg">
+          Combina módulos de invitados, operaciones e insights para ofrecer experiencias destino
+          inolvidables sin sacrificar control ni creatividad.
         </p>
       </div>
       <div className="grid gap-6 lg:grid-cols-3">
-        {mockupPreviews.map((preview) => (
+        {suiteModules.map((module) => (
           <Card
-            key={preview.id}
-            className="group flex h-full flex-col overflow-hidden rounded-[2.5rem] border border-white/60 bg-gradient-to-b from-white/92 via-white/80 to-primary/10"
+            key={module.id}
+            className="flex h-full flex-col overflow-hidden rounded-[2.6rem] border border-white/60 bg-gradient-to-b from-white/92 via-white/85 to-primary/10"
           >
-            <div className="relative aspect-[3/4] w-full overflow-hidden">
+            <div className="relative h-56 w-full overflow-hidden">
               <img
-                src={preview.image}
-                alt={preview.imageAlt}
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                src={module.image}
+                alt={module.imageAlt}
+                className="h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-primary/15" />
+              <span className="absolute left-5 top-5 inline-flex items-center rounded-full bg-white/85 px-3 py-1 text-xs uppercase tracking-[0.35em] text-primary shadow-glass">
+                {module.badge}
+              </span>
             </div>
             <CardContent className="flex flex-1 flex-col gap-4 p-6">
-              <span className="inline-flex items-center rounded-full border border-primary/20 bg-white/80 px-3 py-1 text-xs uppercase tracking-[0.4em] text-primary">
-                {preview.badge}
-              </span>
-              <CardTitle className="text-foreground">{preview.title}</CardTitle>
+              <CardTitle className="text-foreground">{module.title}</CardTitle>
               <CardDescription className="text-foreground/65">
-                {preview.description}
+                {module.description}
               </CardDescription>
-              <div className="mt-auto pt-2">
+              <ul className="mt-2 space-y-2 text-sm text-foreground/65">
+                {module.bullets.map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-auto pt-4">
                 <Button variant="glass" className="w-full">
-                  Ver demo del módulo
+                  Ver módulo
                 </Button>
               </div>
             </CardContent>
@@ -368,37 +352,127 @@ function MockupsSection() {
   );
 }
 
+function WorkflowSection() {
+  return (
+    <section className="container space-y-12">
+      <div className="mx-auto max-w-2xl text-center">
+        <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-white/60 px-4 py-2 text-xs uppercase tracking-[0.35em] text-foreground/60">
+          Workflow guiado
+        </span>
+        <h2 className="mt-4 font-display text-3xl text-foreground md:text-4xl">
+          Implementa en semanas, escala por años
+        </h2>
+        <p className="mt-3 text-base text-foreground/70 md:text-lg">
+          Aterriza procesos inspirados en equipos startup: descubrimiento rápido, creatividad
+          compartida y métricas accionables en cada entrega.
+        </p>
+      </div>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {workflowSteps.map((step) => (
+          <div
+            key={step.step}
+            className="glass-panel flex h-full flex-col justify-between rounded-[2.2rem] border border-white/50 p-6 text-foreground shadow-sm"
+          >
+            <span className="text-xs font-semibold uppercase tracking-[0.4em] text-primary">
+              Paso {step.step}
+            </span>
+            <div className="space-y-3 pt-4">
+              <p className="font-display text-xl text-foreground">{step.title}</p>
+              <p className="text-sm text-foreground/65">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function TestimonialsSection() {
+  return (
+    <section className="container space-y-12">
+      <div className="mx-auto max-w-2xl text-center">
+        <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-white/60 px-4 py-2 text-xs uppercase tracking-[0.35em] text-foreground/60">
+          Historias reales
+        </span>
+        <h2 className="mt-4 font-display text-3xl text-foreground md:text-4xl">
+          Planners que crecieron con The Planners
+        </h2>
+        <p className="mt-3 text-base text-foreground/70 md:text-lg">
+          Agencias boutique y equipos híbridos que escalan sin perder el toque humano.
+        </p>
+      </div>
+      <div className="grid gap-6 lg:grid-cols-2">
+        {testimonials.map((testimonial) => (
+          <Card
+            key={testimonial.name}
+            className="flex h-full flex-col gap-6 rounded-[2.6rem] border border-white/55 bg-white/90 p-8 shadow-glass"
+          >
+            <Sparkles className="h-6 w-6 text-primary" />
+            <p className="text-lg leading-relaxed text-foreground/80">
+              “{testimonial.quote}”
+            </p>
+            <div className="flex items-center gap-4">
+              <img
+                src={testimonial.image}
+                alt={testimonial.imageAlt}
+                className="h-14 w-14 rounded-full object-cover shadow-glow"
+              />
+              <div>
+                <p className="font-semibold text-foreground">{testimonial.name}</p>
+                <p className="text-sm text-foreground/60">
+                  {testimonial.role} · {testimonial.company}
+                </p>
+              </div>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function GuaranteeSection() {
+  return (
+    <section className="container">
+      <div className="glass-panel grid gap-6 rounded-[3rem] border border-border/60 p-10 shadow-sm lg:grid-cols-3">
+        {servicePromises.map((promise) => (
+          <div key={promise.title} className="space-y-4">
+            <promise.icon className="h-10 w-10 rounded-2xl bg-primary/20 p-2 text-primary shadow-glow" />
+            <p className="font-display text-xl text-foreground">{promise.title}</p>
+            <p className="text-sm text-foreground/65">{promise.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function CtaSection() {
   return (
     <section className="container">
-      <div className="glass-panel grid overflow-hidden rounded-[3rem] border border-border/60 shadow-glow lg:grid-cols-2">
+      <div className="glass-panel grid overflow-hidden rounded-[3rem] border border-border/60 shadow-glow lg:grid-cols-[1.1fr,0.9fr]">
         <div className="space-y-6 p-10 lg:p-14">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-white/50 px-4 py-2 text-xs uppercase tracking-[0.4em] text-foreground/60">
-            The Planners OS
+          <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-white/50 px-4 py-2 text-xs uppercase tracking-[0.35em] text-foreground/60">
+            Programa de lanzamiento
           </span>
           <h3 className="font-display text-3xl leading-tight text-foreground md:text-4xl">
-            Coordina tus bodas destino con una plataforma diseñada para planners
-            exigentes.
+            Agenda una sesión con nuestro equipo y activa tu próxima boda destino.
           </h3>
           <p className="text-base text-foreground/70">
-            Paneles interactivos, motor de IA propio y base de datos local para automatizaciones listas para personalizar tus experiencias.
+            Obtén un recorrido personalizado, migración inicial de datos y materiales listos para
+            presentar a tus parejas en menos de dos semanas.
           </p>
-          <div className="space-y-4">
-            {ctaHighlights.map((highlight) => (
-              <div key={highlight.title} className="flex items-start gap-3">
-                <div className="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-primary/15 text-primary">
-                  <CheckCircle2 className="h-4 w-4" />
-                </div>
-                <div>
-                  <p className="font-semibold text-foreground">{highlight.title}</p>
-                  <p className="text-sm text-foreground/60">{highlight.description}</p>
-                </div>
-              </div>
+          <ul className="space-y-3">
+            {ctaChecklist.map((item) => (
+              <li key={item} className="flex items-start gap-3 text-sm text-foreground/65">
+                <CheckCircle2 className="mt-1 h-4 w-4 text-primary" />
+                <span>{item}</span>
+              </li>
             ))}
-          </div>
+          </ul>
           <div className="flex flex-wrap gap-4">
             <Button variant="hero" size="lg">
-              Crear cuenta de planner
+              Reservar demo
             </Button>
             <Button variant="glass" size="lg">
               Descargar brochure
@@ -407,18 +481,21 @@ function CtaSection() {
         </div>
         <div className="relative h-full min-h-[420px]">
           <img
-            src="https://images.pexels.com/photos/1779492/pexels-photo-1779492.jpeg?auto=compress&cs=tinysrgb&w=1200"
-            alt="Invitación elegante para boda destino"
+            src="https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=1200"
+            alt="Planner organizando decoración floral en un evento destino"
             className="absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-background/0 via-background/30 to-primary/25" />
-          <div className="absolute bottom-8 left-8 right-8 rounded-3xl bg-white/70 p-6 text-sm text-foreground shadow-lg backdrop-blur-md">
+          <div className="absolute inset-0 bg-gradient-to-br from-background/10 via-background/20 to-primary/25" />
+          <div className="absolute bottom-8 left-8 right-8 rounded-3xl bg-white/75 p-6 text-sm text-foreground shadow-lg backdrop-blur-md">
             <p className="font-semibold">Paquete Destination Signature</p>
             <ul className="mt-3 space-y-2 text-foreground/70">
-              <li>• Sitio web personalizado con RSVP automático</li>
-              <li>• Itinerario dinámico con recordatorios</li>
-              <li>• Álbum compartido y branding de la experiencia</li>
+              <li>• Sitio RSVP bilingüe con enlaces de pago</li>
+              <li>• Itinerario interactivo para invitados</li>
+              <li>• Plan maestro de proveedores y staff</li>
             </ul>
+            <Button variant="glass" size="sm" className="mt-4">
+              Ver agenda de implementación
+            </Button>
           </div>
         </div>
       </div>

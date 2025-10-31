@@ -6,11 +6,13 @@ export function Footer() {
     <footer className="mt-20 border-t border-white/30 bg-white/30 backdrop-blur-xl">
       <div className="container flex flex-col gap-8 py-12 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-3">
-          <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/80 shadow-glow">
-            <picture>
-              <source srcSet="/the-planners-logo.png" type="image/png" />
-              <img src="/the-planners-logo.svg" alt="The Planners" className="h-9 w-9" />
-            </picture>
+          <span className="flex h-12 w-12 items-center justify-center rounded-3xl bg-white/80 shadow-glow">
+            <img
+              src="/the-planners-logo.svg"
+              alt="The Planners"
+              className="h-9 w-9"
+              loading="lazy"
+            />
           </span>
           <div>
             <p className="font-display text-xl text-foreground">The Planners</p>

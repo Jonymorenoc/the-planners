@@ -38,11 +38,13 @@ export function Navbar() {
     >
       <nav className="container flex items-center justify-between py-4">
         <NavLink to="/" className="flex items-center gap-3">
-          <span className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-white/80 shadow-glow">
-            <picture>
-              <source srcSet="/the-planners-logo.png" type="image/png" />
-              <img src="/the-planners-logo.svg" alt="The Planners" className="h-9 w-9" />
-            </picture>
+          <span className="relative flex h-12 w-12 items-center justify-center rounded-3xl bg-white/85 shadow-glow">
+            <img
+              src="/the-planners-logo.svg"
+              alt="The Planners"
+              className="h-9 w-9"
+              loading="lazy"
+            />
           </span>
           <div className="flex flex-col leading-tight">
             <span className="font-display text-lg text-foreground">The Planners</span>
