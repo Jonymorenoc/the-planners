@@ -61,7 +61,7 @@ function HeroSection() {
         >
           <div className="glass-panel relative overflow-hidden rounded-[2.5rem] border border-white/50 shadow-glow">
             <img
-              src="https://images.unsplash.com/photo-1511288594014-82e9260b162a?auto=format&fit=crop&w=1200&q=80"
+              src="https://images.pexels.com/photos/469313/pexels-photo-469313.jpeg?auto=compress&cs=tinysrgb&w=1200"
               alt="Playa tropical para bodas destino"
               className="h-full w-full object-cover"
             />
@@ -170,7 +170,7 @@ function CtaSection() {
         </div>
         <div className="relative h-full min-h-[420px]">
           <img
-            src="https://images.unsplash.com/photo-1533991310907-736c3c3ea7c2?auto=format&fit=crop&w=1200&q=80"
+            src="https://images.pexels.com/photos/1779492/pexels-photo-1779492.jpeg?auto=compress&cs=tinysrgb&w=1200"
             alt="Invitación elegante para boda destino"
             className="absolute inset-0 h-full w-full object-cover"
           />

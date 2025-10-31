@@ -1,9 +1,18 @@
-import { dashboardStats, quickActions, recentActivity } from "@/data/mockData";
+import {
+  dashboardStats,
+  guestLogisticTemplates,
+  plannerEvents,
+  quickActions,
+  recentActivity,
+} from "@/data/mockData";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, MapPin, Sparkles } from "lucide-react";
+import { ProgressBar } from "@/components/shared/ProgressBar";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
 
 const activityVariant = {
   success: "success",
@@ -109,6 +118,140 @@ export function DashboardPage() {
                 Duplica tableros para bodas similares y personaliza plantillas en minutos.
               </p>
             </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      <section className="grid gap-6 xl:grid-cols-[1.6fr,1fr]">
+        <Card className="border border-border/60 bg-white/75">
+          <CardHeader className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <div>
+              <CardTitle>Portafolio de bodas destino</CardTitle>
+              <CardDescription>
+                Vista ejecutiva de tus eventos activos y próximos hitos.
+              </CardDescription>
+            </div>
+            <Button variant="glass" size="sm">
+              Exportar pipeline
+            </Button>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {plannerEvents.map((event) => {
+              const eventDate = format(new Date(event.date), "d 'de' MMMM yyyy", {
+                locale: es,
+              });
+              return (
+                <div
+                  key={event.id}
+                  className="rounded-3xl border border-white/60 bg-white/50 p-5 shadow-inner transition hover:-translate-y-[2px] hover:shadow-glow"
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.32em] text-foreground/40">
+                        {event.brand}
+                      </p>
+                      <p className="mt-1 font-display text-xl text-foreground">
+                        {event.couple}
+                      </p>
+                      <p className="flex items-center gap-2 text-sm text-foreground/60">
+                        <MapPin className="h-4 w-4" /> {event.destination}
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <Badge variant="outline" className="bg-white/70 text-foreground/70">
+                        {eventDate}
+                      </Badge>
+                      <p className="mt-2 text-xs uppercase tracking-wide text-foreground/50">
+                        {event.nextMilestone}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="mt-5 grid gap-4 md:grid-cols-3">
+                    <div>
+                      <p className="text-xs uppercase tracking-wide text-foreground/50">
+                        Avance general
+                      </p>
+                      <div className="mt-2 flex items-center gap-3">
+                        <ProgressBar value={event.progress} className="flex-1" />
+                        <span className="text-sm font-semibold text-foreground">
+                          {event.progress}%
+                        </span>
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-xs uppercase tracking-wide text-foreground/50">
+                        Alojamiento bloqueado
+                      </p>
+                      <p className="mt-2 text-sm text-foreground/70">
+                        {event.accommodations.roomsReserved} habitaciones · {event.accommodations.suites} suites en {event.accommodations.hotel}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-xs uppercase tracking-wide text-foreground/50">
+                        Invitados
+                      </p>
+                      <p className="mt-2 text-sm text-foreground/70">
+                        {event.guests.confirmed}/{event.guests.total} confirmados · {event.guests.families} familias
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </CardContent>
+        </Card>
+
+        <Card className="border border-border/60 bg-white/80">
+          <CardHeader>
+            <CardTitle>Plantillas inteligentes</CardTitle>
+            <CardDescription>
+              Activa guías según el tipo de grupo o experiencia.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {guestLogisticTemplates.map((template) => (
+              <div
+                key={template.id}
+                className="rounded-3xl border border-transparent bg-white/70 p-4 shadow-inner transition hover:-translate-y-1 hover:border-primary/30 hover:shadow-glow"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="font-semibold text-foreground">{template.title}</p>
+                    <p className="text-xs uppercase tracking-wide text-foreground/40">
+                      {template.focus}
+                    </p>
+                  </div>
+                  <Button variant="ghost" size="sm">
+                    Activar flujo
+                  </Button>
+                </div>
+                <p className="mt-3 text-sm text-foreground/60">
+                  {template.description}
+                </p>
+                <div className="mt-4 grid gap-3 text-sm text-foreground/65">
+                  {template.actions.map((action) => (
+                    <div key={action.label} className="flex items-center gap-3">
+                      <span className="flex h-9 w-9 items-center justify-center rounded-2xl bg-primary/15 text-primary">
+                        <action.icon className="h-4 w-4" />
+                      </span>
+                      <div className="flex-1">
+                        <p className="font-medium text-foreground">{action.label}</p>
+                        <p className="text-xs uppercase tracking-wide text-foreground/45">
+                          SLA {action.eta}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-4 flex flex-wrap gap-3 text-xs uppercase tracking-wide text-foreground/45">
+                  {template.stats.map((stat) => (
+                    <span key={stat.label} className="rounded-full bg-white/80 px-3 py-1 text-foreground">
+                      {stat.label}: {stat.value}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
           </CardContent>
         </Card>
       </section>

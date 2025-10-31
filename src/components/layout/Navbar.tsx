@@ -15,6 +15,7 @@ const mainLinks = [
   { to: "/invitados", label: "Invitados" },
   { to: "/presupuesto", label: "Presupuesto" },
   { to: "/fotos", label: "Fotos" },
+  { to: "/onboarding", label: "Onboarding" },
 ];
 
 const moreLinks = [
@@ -87,6 +88,9 @@ export function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
 
+          <Button variant="glass" size="sm" asChild>
+            <NavLink to="/login">Iniciar sesión</NavLink>
+          </Button>
           <Button variant="hero" size="sm" className="shadow-glow">
             Solicitar demo
           </Button>
@@ -121,6 +125,18 @@ export function Navbar() {
                 {link.label}
               </NavLink>
             ))}
+            <NavLink
+              to="/login"
+              onClick={() => setIsOpen(false)}
+              className={({ isActive }) =>
+                cn(
+                  "block rounded-2xl px-4 py-3 text-sm font-semibold transition hover:bg-primary/10",
+                  isActive && "bg-primary/15 text-primary",
+                )
+              }
+            >
+              Iniciar sesión
+            </NavLink>
             <Button variant="hero" className="w-full">
               Solicitar demo
             </Button>

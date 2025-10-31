@@ -16,6 +16,11 @@ import {
   UserPlus,
   Users,
   Workflow,
+  Building,
+  Glasses,
+  CalendarDays,
+  Baby,
+  BedDouble,
 } from "lucide-react";
 
 export type Feature = {
@@ -243,6 +248,7 @@ export type PhotoCollection = {
   title: string;
   photoCount: number;
   updatedAt: string;
+  image: string;
 };
 
 export const photoCollections: PhotoCollection[] = [
@@ -251,24 +257,28 @@ export const photoCollections: PhotoCollection[] = [
     title: "Save the Date",
     photoCount: 48,
     updatedAt: "2024-09-12T18:30:00Z",
+    image: "https://images.pexels.com/photos/1444442/pexels-photo-1444442.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
     id: "album-2",
     title: "Sesión en Playa",
     photoCount: 72,
     updatedAt: "2024-08-28T14:10:00Z",
+    image: "https://images.pexels.com/photos/235725/pexels-photo-235725.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
     id: "album-3",
     title: "Cena de Ensayo",
     photoCount: 36,
     updatedAt: "2024-09-30T20:45:00Z",
+    image: "https://images.pexels.com/photos/317173/pexels-photo-317173.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
   {
     id: "album-4",
     title: "Ceremonia",
     photoCount: 128,
     updatedAt: "2024-10-03T22:20:00Z",
+    image: "https://images.pexels.com/photos/169190/pexels-photo-169190.jpeg?auto=compress&cs=tinysrgb&w=1200",
   },
 ];
 
@@ -370,5 +380,270 @@ export const dashboardStats = [
     value: "$24,500 / $45,000",
     change: "54% utilizado",
     icon: Banknote,
+  },
+];
+
+export type PlannerEvent = {
+  id: string;
+  couple: string;
+  brand: string;
+  destination: string;
+  date: string;
+  progress: number;
+  status: "planificación" | "ejecución" | "cierre";
+  nextMilestone: string;
+  accommodations: {
+    hotel: string;
+    roomsReserved: number;
+    suites: number;
+  };
+  guests: {
+    confirmed: number;
+    total: number;
+    families: number;
+  };
+};
+
+export const plannerEvents: PlannerEvent[] = [
+  {
+    id: "pe-1",
+    couple: "Ana & Roberto",
+    brand: "Aurora Eventos",
+    destination: "Riviera Maya, México",
+    date: "2025-03-28",
+    progress: 68,
+    status: "planificación",
+    nextMilestone: "Confirmar experiencias welcome party",
+    accommodations: {
+      hotel: "Hotel Coral Reef",
+      roomsReserved: 32,
+      suites: 4,
+    },
+    guests: {
+      confirmed: 86,
+      total: 120,
+      families: 21,
+    },
+  },
+  {
+    id: "pe-2",
+    couple: "Elena & Marco",
+    brand: "The Planners Studio",
+    destination: "Cartagena, Colombia",
+    date: "2025-06-14",
+    progress: 42,
+    status: "planificación",
+    nextMilestone: "Revisión de contrato audiovisual",
+    accommodations: {
+      hotel: "Santorini Bay Hotel",
+      roomsReserved: 24,
+      suites: 6,
+    },
+    guests: {
+      confirmed: 64,
+      total: 95,
+      families: 15,
+    },
+  },
+  {
+    id: "pe-3",
+    couple: "Michelle & David",
+    brand: "DreamWedding Lab",
+    destination: "Lisboa, Portugal",
+    date: "2025-09-07",
+    progress: 25,
+    status: "planificación",
+    nextMilestone: "Bloquear tarifas aéreas flexibles",
+    accommodations: {
+      hotel: "Palacio Atlántico",
+      roomsReserved: 18,
+      suites: 3,
+    },
+    guests: {
+      confirmed: 42,
+      total: 110,
+      families: 9,
+    },
+  },
+];
+
+export type HotelSuggestion = {
+  id: string;
+  name: string;
+  location: string;
+  rating: number;
+  vibe: "boho" | "luxury" | "family" | "urban";
+  perks: string[];
+  roomTypes: Array<{
+    label: string;
+    occupancy: string;
+    pricePerNight: string;
+    includesKidsClub?: boolean;
+  }>;
+  availability: {
+    totalRooms: number;
+    suites: number;
+    holdsUntil: string;
+  };
+};
+
+export const hotelSuggestions: HotelSuggestion[] = [
+  {
+    id: "hotel-1",
+    name: "Coral Reef Grand Resort",
+    location: "Playa del Carmen, México",
+    rating: 4.8,
+    vibe: "luxury",
+    perks: [
+      "Coordinador VIP dedicado",
+      "Ceremonia en gazebo oceánico",
+      "Spa con ritual maya para la pareja",
+    ],
+    roomTypes: [
+      {
+        label: "Suite Ocean Breeze",
+        occupancy: "2 adultos",
+        pricePerNight: "$420 USD",
+      },
+      {
+        label: "Family Lagoon",
+        occupancy: "2 adultos · 2 niños",
+        pricePerNight: "$480 USD",
+        includesKidsClub: true,
+      },
+      {
+        label: "Penthouse Romance",
+        occupancy: "2 adultos",
+        pricePerNight: "$690 USD",
+      },
+    ],
+    availability: {
+      totalRooms: 45,
+      suites: 8,
+      holdsUntil: "15 de enero 2025",
+    },
+  },
+  {
+    id: "hotel-2",
+    name: "Isla Mar Boutique",
+    location: "Isla Mujeres, México",
+    rating: 4.6,
+    vibe: "boho",
+    perks: [
+      "Club de playa exclusivo",
+      "Decoración sostenible y artesanal",
+      "Barra mixología signature",
+    ],
+    roomTypes: [
+      {
+        label: "Suite Garden",
+        occupancy: "2 adultos",
+        pricePerNight: "$310 USD",
+      },
+      {
+        label: "Loft Familiar",
+        occupancy: "2 adultos · 2 niños",
+        pricePerNight: "$355 USD",
+        includesKidsClub: true,
+      },
+      {
+        label: "Villa Rooftop",
+        occupancy: "4 adultos",
+        pricePerNight: "$520 USD",
+      },
+    ],
+    availability: {
+      totalRooms: 28,
+      suites: 6,
+      holdsUntil: "2 de febrero 2025",
+    },
+  },
+  {
+    id: "hotel-3",
+    name: "Palacio Atlántico",
+    location: "Lisboa, Portugal",
+    rating: 4.9,
+    vibe: "urban",
+    perks: [
+      "Terraza panorámica con vista al río Tajo",
+      "Menú degustación por chef con estrella Michelin",
+      "Traslados privados para invitados",
+    ],
+    roomTypes: [
+      {
+        label: "Suite Executive",
+        occupancy: "2 adultos",
+        pricePerNight: "€390",
+      },
+      {
+        label: "Residencia Family",
+        occupancy: "2 adultos · 2 niños",
+        pricePerNight: "€430",
+        includesKidsClub: false,
+      },
+      {
+        label: "Penthouse Heritage",
+        occupancy: "2 adultos",
+        pricePerNight: "€610",
+      },
+    ],
+    availability: {
+      totalRooms: 34,
+      suites: 7,
+      holdsUntil: "20 de marzo 2025",
+    },
+  },
+];
+
+export type GuestLogisticTemplate = {
+  id: string;
+  title: string;
+  focus: string;
+  description: string;
+  actions: Array<{
+    label: string;
+    icon: LucideIcon;
+    eta: string;
+  }>;
+  stats: Array<{
+    label: string;
+    value: string;
+  }>;
+};
+
+export const guestLogisticTemplates: GuestLogisticTemplate[] = [
+  {
+    id: "gl-1",
+    title: "Reservas con familias",
+    focus: "Habitaciones dobles y suites kid friendly",
+    description:
+      "Flujo recomendado para familias con niños. Incluye anticipación de cunas, club infantil y menús especiales.",
+    actions: [
+      { label: "Enviar formulario de edades", icon: Baby, eta: "1 día" },
+      { label: "Bloquear habitaciones Family", icon: BedDouble, eta: "3 días" },
+      { label: "Confirmar upgrades con hotel", icon: Building, eta: "5 días" },
+    ],
+    stats: [
+      { label: "Familias", value: "18 confirmadas" },
+      { label: "Habitaciones", value: "26 reservadas" },
+      { label: "Niños", value: "32 registrados" },
+    ],
+  },
+  {
+    id: "gl-2",
+    title: "Grupo amigos VIP",
+    focus: "Suites y experiencias lifestyle",
+    description:
+      "Coordina suites conectadas, traslados privados y experiencias sunset para el grupo VIP.",
+    actions: [
+      { label: "Asignar concierge privado", icon: Glasses, eta: "6 horas" },
+      { label: "Reservar rooftop sunset", icon: CalendarDays, eta: "2 días" },
+      { label: "Configurar códigos VIP", icon: CheckCircle2, eta: "1 día" },
+    ],
+    stats: [
+      { label: "Suites", value: "12 confirmadas" },
+      { label: "Traslados", value: "6 pendientes" },
+      { label: "Experiencias", value: "4 diseñadas" },
+    ],
   },
 ];

@@ -25,6 +25,7 @@ import {
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { seatingGuests, seatingTables } from "@/data/mockData";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 type GuestSeat = {
@@ -54,6 +55,21 @@ const assignedIds = new Set(
 const defaultUnassigned = seatingGuests.filter(
   (guest) => !assignedIds.has(guest.id),
 );
+
+const seatingActions = [
+  {
+    title: "Generar seating cards",
+    description: "Exporta tarjetas personalizadas con código QR y mesa asignada.",
+  },
+  {
+    title: "Simular check-in",
+    description: "Activa modo demo para validar el escaneo por hostess.",
+  },
+  {
+    title: "Recomendación IA",
+    description: "Sugiere intercambios para equilibrar familias y grupo VIP.",
+  },
+];
 
 export function SeatingPlannerPage() {
   const [tables, setTables] = useState<Record<string, GuestSeat[]>>(
@@ -284,6 +300,28 @@ export function SeatingPlannerPage() {
               <Note icon={Calendar} title="Día del evento">
                 Genera códigos QR para check-in y visualiza mesa asignada al escanear.
               </Note>
+            </CardContent>
+          </Card>
+          <Card className="border border-border/60 bg-white/65">
+            <CardHeader>
+              <CardTitle>Acciones recomendadas</CardTitle>
+              <CardDescription>
+                Utiliza estas funciones dummy para mostrar en demos.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3 text-sm text-foreground/65">
+              {seatingActions.map((action) => (
+                <div
+                  key={action.title}
+                  className="rounded-2xl border border-transparent bg-white/70 p-3 shadow-inner transition hover:-translate-y-[1px] hover:border-primary/30 hover:shadow-glow"
+                >
+                  <p className="font-semibold text-foreground">{action.title}</p>
+                  <p>{action.description}</p>
+                </div>
+              ))}
+              <Button variant="hero" className="w-full">
+                Ejecutar demo de seating
+              </Button>
             </CardContent>
           </Card>
         </div>

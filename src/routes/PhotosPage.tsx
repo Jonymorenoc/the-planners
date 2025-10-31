@@ -33,7 +33,7 @@ export function PhotosPage() {
           >
             <div className="relative h-48 w-full">
               <img
-                src={`https://source.unsplash.com/featured/600x400/?wedding,${collection.title}`}
+                src={collection.image}
                 alt={collection.title}
                 className="h-full w-full object-cover"
               />
