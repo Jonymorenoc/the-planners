@@ -12,13 +12,18 @@ import { cn } from "@/lib/utils";
 
 const mainLinks = [
   { to: "/dashboard", label: "Dashboard" },
-  { to: "/invitados", label: "Invitados" },
-  { to: "/presupuesto", label: "Presupuesto" },
-  { to: "/fotos", label: "Fotos" },
-  { to: "/onboarding", label: "Onboarding" },
+  { to: "/clientes", label: "Clientes" },
+  { to: "/eventos", label: "Eventos" },
+  { to: "/rooming-list", label: "Rooming List" },
+  { to: "/pagos", label: "Pagos" },
 ];
 
 const moreLinks = [
+  { to: "/cotizaciones", label: "Cotizaciones" },
+  { to: "/proveedores", label: "Proveedores" },
+  { to: "/reportes", label: "Reportes" },
+  { to: "/invitados", label: "Invitados" },
+  { to: "/presupuesto", label: "Presupuesto" },
   { to: "/sitio-web", label: "Sitio Web" },
   { to: "/planificador", label: "Planificador de Asientos" },
   { to: "/contratos", label: "Contratos" },

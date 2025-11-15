@@ -12,6 +12,15 @@ import { ContractsPage } from "@/routes/ContractsPage";
 import { OnboardingPage } from "@/routes/OnboardingPage";
 import { LoginPage } from "@/routes/LoginPage";
 
+// Nuevas páginas del sistema Planners Edition
+import ClientsPage from "@/routes/ClientsPage";
+import EventsPage from "@/routes/EventsPage";
+import RoomingListPage from "@/routes/RoomingListPage";
+import PaymentsPage from "@/routes/PaymentsPage";
+import QuotesPage from "@/routes/QuotesPage";
+import ProvidersPage from "@/routes/ProvidersPage";
+import ReportsPage from "@/routes/ReportsPage";
+
 function App() {
   return (
     <div className="flex min-h-screen flex-col">
@@ -20,6 +29,17 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
+
+          {/* Planners Edition Routes */}
+          <Route path="/clientes" element={<ClientsPage />} />
+          <Route path="/eventos" element={<EventsPage />} />
+          <Route path="/rooming-list" element={<RoomingListPage />} />
+          <Route path="/pagos" element={<PaymentsPage />} />
+          <Route path="/cotizaciones" element={<QuotesPage />} />
+          <Route path="/proveedores" element={<ProvidersPage />} />
+          <Route path="/reportes" element={<ReportsPage />} />
+
+          {/* Original Routes */}
           <Route path="/invitados" element={<GuestsPage />} />
           <Route path="/presupuesto" element={<BudgetPage />} />
           <Route path="/fotos" element={<PhotosPage />} />
@@ -28,6 +48,7 @@ function App() {
           <Route path="/planificador" element={<SeatingPlannerPage />} />
           <Route path="/contratos" element={<ContractsPage />} />
           <Route path="/login" element={<LoginPage />} />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
