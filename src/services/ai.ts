@@ -14,14 +14,6 @@ export type GeneratedWebsite = {
   suggestedSections: string[];
 };
 
-export type ContractAnalysis = {
-  vendor: string;
-  summary: string;
-  clauses: Array<{ title: string; insight: string }>;
-  totalCost?: string;
-  keyDates?: string[];
-};
-
 const apiBaseUrl =
   import.meta.env.VITE_DW_API_BASE_URL || "http://localhost:5174/api";
 
@@ -56,35 +48,6 @@ export async function generateWebsite(
   return (await response.json()) as GeneratedWebsite;
 }
 
-export async function analyzeContract(
-  file: File,
-): Promise<ContractAnalysis> {
-  if (!import.meta.env.VITE_ENABLE_REMOTE_AI) {
-    return buildMockContractAnalysis(file);
-  }
-
-  const formData = new FormData();
-  formData.append("file", file);
-  formData.append(
-    "systemPrompt",
-    "Analiza contratos y extrae fechas, montos, términos clave",
-  );
-
-  const response = await fetch(`${apiBaseUrl}/analyze-contract`, {
-    method: "POST",
-    body: formData,
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(
-      `Error al analizar contrato (${response.status}): ${errorText}`,
-    );
-  }
-
-  return (await response.json()) as ContractAnalysis;
-}
-
 const buildMockWebsite = (
   payload: WebsiteGeneratorPayload,
 ): GeneratedWebsite => ({
@@ -96,31 +59,6 @@ const buildMockWebsite = (
     "Recomendaciones de viaje",
     "Código de vestimenta",
   ],
-});
-
-const buildMockContractAnalysis = (file: File): ContractAnalysis => ({
-  vendor: file.name.replace(/\.[^/.]+$/, ""),
-  summary:
-    "Contrato analizado con éxito. Se identificaron condiciones de pago escalonadas y cláusulas de cancelación flexibles.",
-  clauses: [
-    {
-      title: "Pagos",
-      insight:
-        "30% a la firma, 40% dos semanas antes del evento, 30% posterior a la entrega final.",
-    },
-    {
-      title: "Cancelaciones",
-      insight:
-        "Reembolso del 70% si se cancela con 30 días de anticipación, 40% con 15 días.",
-    },
-    {
-      title: "Extras",
-      insight:
-        "Galería digital con disponibilidad de 12 meses y derechos de uso personal.",
-    },
-  ],
-  totalCost: "$5,200 USD",
-  keyDates: ["Pago final: 15 de noviembre 2024", "Evento: 21 de noviembre 2024"],
 });
 
 const buildMockPreview = (payload: WebsiteGeneratorPayload) => `

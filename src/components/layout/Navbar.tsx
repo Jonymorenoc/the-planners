@@ -26,7 +26,6 @@ const moreLinks = [
   { to: "/presupuesto", label: "Presupuesto" },
   { to: "/sitio-web", label: "Sitio Web" },
   { to: "/planificador", label: "Planificador de Asientos" },
-  { to: "/contratos", label: "Contratos" },
 ];
 
 export function Navbar() {
@@ -99,8 +98,8 @@ export function Navbar() {
               </svg>
             </NavLink>
           </Button>
-          <Button variant="hero" size="sm" className="shadow-glow">
-            Solicitar demo
+          <Button variant="hero" size="sm" className="shadow-glow" asChild>
+            <NavLink to="/onboarding">Iniciar demo</NavLink>
           </Button>
         </div>
 
@@ -145,8 +144,8 @@ export function Navbar() {
             >
               Iniciar sesión
             </NavLink>
-            <Button variant="hero" className="w-full">
-              Solicitar demo
+            <Button variant="hero" className="w-full" asChild>
+              <NavLink to="/onboarding">Iniciar demo</NavLink>
             </Button>
           </div>
         </div>
