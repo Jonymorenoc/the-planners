@@ -109,7 +109,7 @@ export function LoginPage() {
               </Button>
             </form>
             <p className="mt-6 text-center text-xs text-foreground/50">
-              ¿Aún sin cuenta? <Link to="/onboarding" className="font-semibold text-primary">Configura tu primer demo</Link>
+              ¿Aún sin cuenta? <Link to="/onboarding" className="font-semibold text-primary">Iniciar demo</Link>
             </p>
           </CardContent>
         </Card>
